@@ -51,7 +51,7 @@ public class CourseServiceImp implements CourseService {
     @Transactional(readOnly = true)
     @Override
     public List<CourseDto> findAll() {
-        return mapper.map(this.courseRepository.findAll(), new TypeToken<List<StudentDto>>() {
+        return mapper.map(this.courseRepository.findAll(), new TypeToken<List<CourseDto>>() {
         }.getType());
     }
 
