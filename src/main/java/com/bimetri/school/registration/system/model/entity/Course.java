@@ -17,11 +17,8 @@ public class Course extends BaseEntity {
     private String courseName;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "courseList", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "courseList", fetch = FetchType.LAZY)
     private List<Student> studentList = new ArrayList<>();
 
-//    @JsonIgnore
-//    @ManyToOne
-//    private StudentCourse studentCourse;
 
 }

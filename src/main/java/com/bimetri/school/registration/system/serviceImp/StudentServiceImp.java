@@ -56,7 +56,16 @@ public class StudentServiceImp implements StudentService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void deleteById(Long id) {
+    public void softDelete(StudentDto studentDto) {
+        Student student = this.studentRepository.findById(studentDto.getId()).orElse(null);
+        if (student.getEnable() == 1) {
+            student.setEnable(0);
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void delete(Long id) {
         this.studentRepository.deleteById(id);
     }
 
@@ -66,22 +75,6 @@ public class StudentServiceImp implements StudentService {
         return mapper.map(this.studentRepository.findAll(), new TypeToken<List<StudentDto>>() {
         }.getType());
     }
-
-//    @Transactional(rollbackFor = Exception.class)
-//    @Override
-//    public void addCourse(StudentCourseDto studentCourseDto) {
-//
-//        Student student = mapper.map(
-//                this.studentRepository.findById(studentCourseDto.getStudent_id()).get(), Student.class);
-//
-//        for (Long id : studentCourseDto.getCourse_id_List()) {
-//            //A student cannot be registered in more than 5 courses.
-//            if (studentCourseDto.getCourse_id_List().size() < 5) {
-//                Course course = this.courseRepository.findById(id).orElse(null);
-//                student.getCourseList().add(course);
-//            }
-//        }
-//    }
 
     @Transactional(rollbackFor = Exception.class)
     @Override

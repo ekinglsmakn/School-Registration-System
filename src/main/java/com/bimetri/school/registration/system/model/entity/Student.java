@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,14 +23,9 @@ public class Student extends BaseEntity {
     private String number; //student number
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST ,fetch = FetchType.EAGER)
     @JoinTable(name = "students_courses", joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courseList = new ArrayList<>();
-
-//    @JsonIgnore
-//    @ManyToOne
-//    private StudentCourse studentCourse;
-
-
+    
 }

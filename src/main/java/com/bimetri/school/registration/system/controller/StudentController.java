@@ -38,10 +38,16 @@ public class StudentController {
         this.studentService.addCourse(studentCourseDto);
     }
 
+    @RequestMapping(value = "/softdelete", method = RequestMethod.PUT)
+    public ResponseEntity softDeleteStudent(@RequestBody StudentDto studentDto) {
+        this.studentService.softDelete(studentDto);
+        return new ResponseEntity("Deleted Succeeded!", HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteStudent(@PathVariable("id") Long id) {
-        this.studentService.deleteById(id);
-        return new ResponseEntity("Deleting Succeeded!",HttpStatus.OK);
+    public ResponseEntity softDeleteStudent(@PathVariable Long id) {
+        this.studentService.delete(id);
+        return new ResponseEntity("Deleted Succeeded!", HttpStatus.OK);
     }
 
     //Lists all students in database

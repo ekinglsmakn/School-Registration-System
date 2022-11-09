@@ -11,7 +11,9 @@ public interface StudentService {
 
     StudentDto update(StudentDto studentDto);
 
-    void deleteById(Long id);
+    void softDelete(StudentDto studentDto);
+
+    void delete(Long id);
 
     List<StudentDto> findAll();
 

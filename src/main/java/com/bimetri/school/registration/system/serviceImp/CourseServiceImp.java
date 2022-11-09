@@ -48,12 +48,6 @@ public class CourseServiceImp implements CourseService {
         return mapper.map(course, CourseDto.class);
     }
 
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public void deleteById(CourseDto courseDto) {
-        this.courseRepository.deleteById(courseDto.getId());
-    }
-
     @Transactional(readOnly = true)
     @Override
     public List<CourseDto> findAll() {
@@ -61,21 +55,39 @@ public class CourseServiceImp implements CourseService {
         }.getType());
     }
 
-//    @Transactional(rollbackFor = Exception.class)
-//    @Override
-//    public void addStudent(CourseStudentDto courseStudentDto) {
-//        Course course = mapper.map(
-//                this.courseRepository.findById(courseStudentDto.getCourse_id()).get(), Course.class);
-//
-//        for (Long id : courseStudentDto.getStudent_id_list()) {
-//
-//            //A Course Cannot Register More Than 50 Students
-//            if (courseStudentDto.getStudent_id_list().size() < 50) {
-//                Student student = this.studentRepository.findById(id).orElse(null);
-//                course.getStudentList().add(student);
-//            }
-//        }
-//    }
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void delete(Long id) {
+
+        this.courseRepository.deleteById(id);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void softDelete(CourseDto courseDto) {
+        Course course = this.courseRepository.findById(courseDto.getId()).orElse(null);
+
+        if (course.getEnable() == 1) {
+            course.setEnable(0);
+        }
+
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void addStudent(CourseStudentDto courseStudentDto) {
+        Course course = mapper.map(
+                this.courseRepository.findById(courseStudentDto.getCourse_id()).get(), Course.class);
+
+        for (Long id : courseStudentDto.getStudent_id_list()) {
+
+            //A Course Cannot Register More Than 50 Students
+            if (courseStudentDto.getStudent_id_list().size() < 50) {
+                Student student = this.studentRepository.findById(id).orElse(null);
+                course.getStudentList().add(student);
+            }
+        }
+    }
 
     @Transactional(readOnly = true)
     @Override

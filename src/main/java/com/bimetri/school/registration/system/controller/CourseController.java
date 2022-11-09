@@ -3,6 +3,7 @@ package com.bimetri.school.registration.system.controller;
 import com.bimetri.school.registration.system.model.dto.*;
 import com.bimetri.school.registration.system.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,15 +26,20 @@ public class CourseController {
         return courseService.update(courseDto);
     }
 
-//    @RequestMapping(value = "/addStudent", method = RequestMethod.PUT)
-//    public void addCourse(@RequestBody CourseStudentDto courseStudentDto) {
-//        this.courseService.addStudent(courseStudentDto);
-//    }
+    @RequestMapping(value = "/addStudent", method = RequestMethod.PUT)
+    public void addCourse(@RequestBody CourseStudentDto courseStudentDto) {
+        this.courseService.addStudent(courseStudentDto);
+    }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public ResponseEntity deleteCourse(@RequestBody CourseDto courseDto) {
-        this.courseService.deleteById(courseDto);
-        return ResponseEntity.ok().build();
+    @RequestMapping(value = "/softdelete", method = RequestMethod.PUT)
+    public ResponseEntity softDeleteCourse(@RequestBody CourseDto courseDto) {
+        this.courseService.softDelete(courseDto);
+        return new ResponseEntity("Deleted Succeeded!", HttpStatus.OK);
+    }
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteCourse(@PathVariable Long id) {
+        this.courseService.delete(id);
+        return new ResponseEntity("Deleted Succeeded!", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
