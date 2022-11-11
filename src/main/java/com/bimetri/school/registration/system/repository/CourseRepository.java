@@ -1,6 +1,6 @@
 package com.bimetri.school.registration.system.repository;
 
-import com.bimetri.school.registration.system.model.dto.CourseInformationDto;
+import com.bimetri.school.registration.system.model.dto.CourseProjectionDto;
 import com.bimetri.school.registration.system.model.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    List<CourseInformationDto> findAllById(@Param("id") Long courseId);
+    List<CourseProjectionDto> findAllById(@Param("id") Long courseId);
 }

@@ -3,7 +3,7 @@ package com.bimetri.school.registration.system.serviceImp;
 import com.bimetri.school.registration.system.config.CustomizedMapper;
 import com.bimetri.school.registration.system.model.dto.StudentCourseDto;
 import com.bimetri.school.registration.system.model.dto.StudentDto;
-import com.bimetri.school.registration.system.model.dto.StudentInformationDto;
+import com.bimetri.school.registration.system.model.dto.StudentProjectionDto;
 import com.bimetri.school.registration.system.model.entity.Course;
 import com.bimetri.school.registration.system.model.entity.Student;
 import com.bimetri.school.registration.system.repository.CourseRepository;
@@ -19,14 +19,16 @@ import java.util.Optional;
 
 @Service
 public class StudentServiceImp implements StudentService {
+
+    final int COURSE_SİZE = 6;
+
     @Autowired
     private StudentRepository studentRepository;
-
     @Autowired
     private CustomizedMapper mapper;
-
     @Autowired
     private CourseRepository courseRepository;
+
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -85,7 +87,7 @@ public class StudentServiceImp implements StudentService {
 
         for (Long id : studentCourseDto.getCourse_id_List()) {
             //A student cannot be registered in more than 5 courses.
-            if (studentCourseDto.getCourse_id_List().size() < 5) {
+            if (studentCourseDto.getCourse_id_List().size() < COURSE_SİZE) {
                 Course course = this.courseRepository.findById(id).orElse(null);
                 student.getCourseList().add(course);
             }
@@ -94,8 +96,8 @@ public class StudentServiceImp implements StudentService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<StudentInformationDto> findRegisteredStudentById(Long studentId) {
-        return mapper.map(this.studentRepository.findAllById(studentId), new TypeToken<List<StudentInformationDto>>() {
+    public List<StudentProjectionDto> findRegisteredStudentById(Long studentId) {
+        return mapper.map(this.studentRepository.findAllById(studentId), new TypeToken<List<StudentProjectionDto>>() {
         }.getType());
     }
 

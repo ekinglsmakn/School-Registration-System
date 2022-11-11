@@ -11,6 +11,7 @@ import java.util.List;
 
 @RequestMapping("/api/course")
 @RestController
+@CrossOrigin("http://localhost:3000") //connection with React
 public class CourseController {
 
     @Autowired
@@ -36,6 +37,7 @@ public class CourseController {
         this.courseService.softDelete(courseDto);
         return new ResponseEntity("Deleted Succeeded!", HttpStatus.OK);
     }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteCourse(@PathVariable Long id) {
         this.courseService.delete(id);
@@ -48,9 +50,9 @@ public class CourseController {
     }
 
 
-    //Filters all students with a specific course (courseId)
-    @RequestMapping(value = "/filterByCourseId", method = RequestMethod.GET)
-    public List<CourseInformationDto> findCourseById(@RequestParam("id") Long id){
-        return this.courseService.findCourseStudentById(id);
+    //lists all students registered in a specific course (by course id)
+    @RequestMapping(value = "/filterByCourse", method = RequestMethod.GET)
+    public List<CourseProjectionDto> filterByCourse(@RequestParam("id") Long id) {
+        return this.courseService.filterByCourse(id);
     }
 }
