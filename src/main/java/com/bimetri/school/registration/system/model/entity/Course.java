@@ -18,6 +18,7 @@ public class Course extends BaseEntity {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "courseList", fetch = FetchType.LAZY)
+    @Column(unique = true)
     private List<Student> studentList = new ArrayList<>();
 
 

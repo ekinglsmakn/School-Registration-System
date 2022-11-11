@@ -51,7 +51,7 @@ public class CourseServiceImp implements CourseService {
     @Transactional(readOnly = true)
     @Override
     public List<CourseDto> findAll() {
-        return mapper.map(this.courseRepository.findAll(), new TypeToken<List<StudentDto>>() {
+        return mapper.map(this.courseRepository.findAll(), new TypeToken<List<CourseDto>>() {
         }.getType());
     }
 
@@ -89,10 +89,12 @@ public class CourseServiceImp implements CourseService {
         }
     }
 
+
+    //finds students registered in a specific course
     @Transactional(readOnly = true)
     @Override
-    public List<CourseInformationDto> findCourseStudentById(Long courseId) {
-        return mapper.map(this.courseRepository.findAllById(courseId), new TypeToken<List<CourseInformationDto>>() {
+    public List<CourseProjectionDto> filterByCourse(Long courseId) {
+        return mapper.map(this.courseRepository.findAllById(courseId), new TypeToken<List<CourseProjectionDto>>() {
         }.getType());
     }
 

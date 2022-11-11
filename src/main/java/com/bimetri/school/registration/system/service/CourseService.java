@@ -1,7 +1,7 @@
 package com.bimetri.school.registration.system.service;
 
 import com.bimetri.school.registration.system.model.dto.CourseDto;
-import com.bimetri.school.registration.system.model.dto.CourseInformationDto;
+import com.bimetri.school.registration.system.model.dto.CourseProjectionDto;
 import com.bimetri.school.registration.system.model.dto.CourseStudentDto;
 
 import java.util.List;
@@ -19,6 +19,6 @@ public interface CourseService {
 
     void addStudent(CourseStudentDto courseStudentDto);
 
-    List<CourseInformationDto> findCourseStudentById(Long courseId);
+    List<CourseProjectionDto> filterByCourse(Long courseId);
 
 }

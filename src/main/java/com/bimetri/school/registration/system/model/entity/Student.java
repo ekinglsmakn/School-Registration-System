@@ -23,6 +23,7 @@ public class Student extends BaseEntity {
     private String number; //student number
 
     @JsonIgnore
+    @Column(unique = true)
     @ManyToMany(cascade = CascadeType.PERSIST ,fetch = FetchType.EAGER)
     @JoinTable(name = "students_courses", joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))

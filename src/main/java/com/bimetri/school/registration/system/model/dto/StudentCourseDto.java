@@ -4,8 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+
 /*
- * This Dto class is used to assign courses to a student
+ * This Dto class is used to add course data to student
  *
  * */
 @Getter

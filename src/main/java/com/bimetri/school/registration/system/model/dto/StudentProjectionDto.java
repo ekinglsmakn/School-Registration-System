@@ -4,7 +4,12 @@ import com.bimetri.school.registration.system.model.entity.Course;
 
 import java.util.List;
 
-public interface StudentInformationDto {
+/*
+*
+* Projection interface used to find courses that a specific student is registered in
+*
+* */
+public interface StudentProjectionDto {
     public Long getId();
 
     public String getName();

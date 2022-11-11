@@ -2,8 +2,7 @@ package com.bimetri.school.registration.system.controller;
 
 import com.bimetri.school.registration.system.model.dto.StudentCourseDto;
 import com.bimetri.school.registration.system.model.dto.StudentDto;
-import com.bimetri.school.registration.system.model.dto.StudentInformationDto;
-import com.bimetri.school.registration.system.model.entity.Student;
+import com.bimetri.school.registration.system.model.dto.StudentProjectionDto;
 import com.bimetri.school.registration.system.repository.StudentRepository;
 import com.bimetri.school.registration.system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import java.util.List;
 
 @RequestMapping("/api/student")
 @RestController
+@CrossOrigin("http://localhost:3000") //connection with React
 public class StudentController {
 
     @Autowired
@@ -34,20 +34,21 @@ public class StudentController {
 
     //Course assignment can only be made via Student.
     @RequestMapping(value = "/addCourse", method = RequestMethod.PUT)
-    public void addCourse(@RequestBody StudentCourseDto studentCourseDto) {
+    public ResponseEntity addCourse(@RequestBody StudentCourseDto studentCourseDto) {
         this.studentService.addCourse(studentCourseDto);
+        return new ResponseEntity("Adding Succeeded!", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/softdelete", method = RequestMethod.PUT)
     public ResponseEntity softDeleteStudent(@RequestBody StudentDto studentDto) {
         this.studentService.softDelete(studentDto);
-        return new ResponseEntity("Deleted Succeeded!", HttpStatus.OK);
+        return new ResponseEntity("Deletion Succeeded!", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity softDeleteStudent(@PathVariable Long id) {
         this.studentService.delete(id);
-        return new ResponseEntity("Deleted Succeeded!", HttpStatus.OK);
+        return new ResponseEntity("Deletion Succeeded!", HttpStatus.OK);
     }
 
     //Lists all students in database
@@ -59,7 +60,7 @@ public class StudentController {
 
     //Filters all courses a particular student is registered in
     @RequestMapping(value = "/registered", method = RequestMethod.GET)
-    public List<StudentInformationDto> findRegisteredStudentById(@RequestParam("id") Long id) {
+    public List<StudentProjectionDto> findRegisteredStudentById(@RequestParam("id") Long id) {
         return this.studentService.findRegisteredStudentById(id);
     }
 

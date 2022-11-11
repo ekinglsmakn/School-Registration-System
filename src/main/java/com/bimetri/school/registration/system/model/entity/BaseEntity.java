@@ -16,5 +16,4 @@ public class BaseEntity implements Serializable {
     private Long id;
     private int enable = 1;
 
-
 }
