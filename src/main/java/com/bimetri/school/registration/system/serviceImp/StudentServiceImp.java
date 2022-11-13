@@ -39,19 +39,33 @@ public class StudentServiceImp implements StudentService {
         return mapper.map(student, StudentDto.class);
 
     }
+//
+//    @Transactional(rollbackFor = Exception.class)
+//    @Override
+//    public StudentDto update(StudentDto studentDto) {
+//        Optional<Student> studentOptional = this.studentRepository.findById(studentDto.getId());
+//        Student student = new Student();
+//        if (studentOptional.isPresent()) {
+//            student = studentOptional.get();
+//            student.setName(studentDto.getName());
+//            student.setSurname(studentDto.getSurname());
+//            student.setNumber(studentDto.getNumber());
+//            this.studentRepository.save(student);
+//        }
+//        return mapper.map(student, StudentDto.class);
+//
+//    }
+
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public StudentDto update(StudentDto studentDto) {
-        Optional<Student> studentOptional = this.studentRepository.findById(studentDto.getId());
-        Student student = new Student();
-        if (studentOptional.isPresent()) {
-            student = studentOptional.get();
-            student.setName(studentDto.getName());
-            student.setSurname(studentDto.getSurname());
-            student.setNumber(studentDto.getNumber());
-            this.studentRepository.save(student);
-        }
+    public StudentDto update(StudentDto studentDto, Long id) {
+        Student student = this.studentRepository.findById(id).orElse(null);
+        Student newStudent = mapper.map(studentDto,Student.class);
+        student.setName(newStudent.getName());
+        student.setSurname(newStudent.getSurname());
+        student.setNumber(newStudent.getNumber());
+        this.studentRepository.save(student);
         return mapper.map(student, StudentDto.class);
 
     }
@@ -69,6 +83,12 @@ public class StudentServiceImp implements StudentService {
     @Override
     public void delete(Long id) {
         this.studentRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public StudentDto findById(Long id) {
+        return mapper.map(this.studentRepository.findById(id), StudentDto.class);
     }
 
     @Transactional(readOnly = true)

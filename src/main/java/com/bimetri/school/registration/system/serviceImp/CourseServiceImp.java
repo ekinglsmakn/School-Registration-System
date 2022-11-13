@@ -37,14 +37,11 @@ public class CourseServiceImp implements CourseService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public CourseDto update(CourseDto courseDto) {
-        Optional<Course> courseOptional = this.courseRepository.findById(courseDto.getId());
-        Course course = new Course();
-        if (courseOptional.isPresent()) {
-            course = courseOptional.get();
-            course.setCourseName(courseDto.getCourseName());
-            this.courseRepository.save(course);
-        }
+    public CourseDto update(CourseDto courseDto,Long id) {
+        //parameter "courseDto" contains new information
+        Course course = this.courseRepository.findById(id).orElse(null);
+        course.setCourseName(courseDto.getCourseName());
+        this.courseRepository.save(course);
         return mapper.map(course, CourseDto.class);
     }
 

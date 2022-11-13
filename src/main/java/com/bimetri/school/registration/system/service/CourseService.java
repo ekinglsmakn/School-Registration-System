@@ -9,7 +9,7 @@ import java.util.List;
 public interface CourseService {
     CourseDto save(CourseDto courseDto);
 
-    CourseDto update(CourseDto courseDto);
+    CourseDto update(CourseDto courseDto, Long id);
 
     List<CourseDto> findAll();
 

@@ -27,9 +27,9 @@ public class StudentController {
         return this.studentService.save(studentDto);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public StudentDto updateStudent(@RequestBody StudentDto studentDto) {
-        return studentService.update(studentDto);
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public StudentDto updateStudent(@RequestBody StudentDto studentDto, @PathVariable Long id) {
+        return studentService.update(studentDto, id);
     }
 
     //Course assignment can only be made via Student.
@@ -49,6 +49,12 @@ public class StudentController {
     public ResponseEntity softDeleteStudent(@PathVariable Long id) {
         this.studentService.delete(id);
         return new ResponseEntity("Deletion Succeeded!", HttpStatus.OK);
+    }
+
+    //Lists all students in database
+    @RequestMapping(value = "/getById{id}", method = RequestMethod.GET)
+    public StudentDto findStudentById(@PathVariable Long id) {
+        return this.studentService.findById(id);
     }
 
     //Lists all students in database

@@ -22,9 +22,9 @@ public class CourseController {
         return this.courseService.save(courseDto);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public CourseDto updateCourse(@RequestBody CourseDto courseDto) {
-        return courseService.update(courseDto);
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    public CourseDto updateCourse(@RequestBody CourseDto courseDto, @PathVariable Long id) {
+        return courseService.update(courseDto, id);
     }
 
     @RequestMapping(value = "/addStudent", method = RequestMethod.PUT)

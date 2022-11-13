@@ -9,11 +9,13 @@ import java.util.List;
 public interface StudentService {
     StudentDto save(StudentDto studentDto);
 
-    StudentDto update(StudentDto studentDto);
+    StudentDto update(StudentDto studentDto, Long id);
 
     void softDelete(StudentDto studentDto);
 
     void delete(Long id);
+
+    StudentDto findById(Long id);
 
     List<StudentDto> findAll();
 
