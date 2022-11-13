@@ -7,6 +7,7 @@ Kullanılan Teknolojiler/Veri Tabanı/Framework'ler
 <li>Hibernate</li>
 <li>Maven Plugin</li>
 <li>RestFul</li>
+<li>Lombok</li>
 <li>MySql Database (8.0.31)</li>
 <li>IDE: Intellij Idea </li>
 </ul>
