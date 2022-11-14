@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class CourseServiceImp implements CourseService {
@@ -29,18 +29,23 @@ public class CourseServiceImp implements CourseService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public CourseDto save(CourseDto courseDto) {
-        Course course = mapper.map(courseDto, Course.class);
-        this.courseRepository.save(course);
-        return mapper.map(course, CourseDto.class);
+    public String save(CourseDto courseDto) {
+        if (courseRepository.findById(courseDto.getId()).isPresent()) {
+            return "course already exists";
+        } else {
+            Course course = mapper.map(courseDto, Course.class);
+            this.courseRepository.save(course);
+            return "saving succeded";
+        }
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public CourseDto update(CourseDto courseDto,Long id) {
+    public CourseDto update(CourseDto courseDto, Long id) {
         //parameter "courseDto" contains new information
         Course course = this.courseRepository.findById(id).orElse(null);
         course.setCourseName(courseDto.getCourseName());
+        course.setEnable(courseDto.getEnable());
         this.courseRepository.save(course);
         return mapper.map(course, CourseDto.class);
     }
@@ -61,8 +66,8 @@ public class CourseServiceImp implements CourseService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void softDelete(CourseDto courseDto) {
-        Course course = this.courseRepository.findById(courseDto.getId()).orElse(null);
+    public void softDelete(Long id) {
+        Course course = this.courseRepository.findById(id).orElse(null);
 
         if (course.getEnable() == 1) {
             course.setEnable(0);

@@ -11,30 +11,38 @@ import java.util.List;
 
 @RequestMapping("/api/course")
 @RestController
-//@CrossOrigin("http://localhost:3000") //connection with React
+@CrossOrigin("http://localhost:3000") //connection with React
 public class CourseController {
 
     @Autowired
     private CourseService courseService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public CourseDto saveCourse(@RequestBody CourseDto courseDto) {
-        return this.courseService.save(courseDto);
+    public ResponseEntity saveCourse(@RequestBody CourseDto courseDto) {
+        try {
+            this.courseService.save(courseDto);
+            return new ResponseEntity("Saving Succeeded!", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("course already exists", HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
-    public CourseDto updateCourse(@RequestBody CourseDto courseDto, @PathVariable Long id) {
-        return courseService.update(courseDto, id);
+    public ResponseEntity updateCourse(@RequestBody CourseDto courseDto, @PathVariable Long id) {
+        courseService.update(courseDto, id);
+        return new ResponseEntity("updated Succeeded!", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/addStudent", method = RequestMethod.PUT)
-    public void addCourse(@RequestBody CourseStudentDto courseStudentDto) {
+    public ResponseEntity addCourse(@RequestBody CourseStudentDto courseStudentDto) {
         this.courseService.addStudent(courseStudentDto);
+        return new ResponseEntity("Added Succeeded!", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/softdelete", method = RequestMethod.PUT)
-    public ResponseEntity softDeleteCourse(@RequestBody CourseDto courseDto) {
-        this.courseService.softDelete(courseDto);
+    @RequestMapping(value = "/softdelete/{id}", method = RequestMethod.PUT)
+    public ResponseEntity softDeleteCourse(@PathVariable Long id) {
+        this.courseService.softDelete(id);
         return new ResponseEntity("Deleted Succeeded!", HttpStatus.OK);
     }
 

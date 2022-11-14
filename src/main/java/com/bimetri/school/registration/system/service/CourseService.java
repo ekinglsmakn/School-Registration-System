@@ -7,13 +7,13 @@ import com.bimetri.school.registration.system.model.dto.CourseStudentDto;
 import java.util.List;
 
 public interface CourseService {
-    CourseDto save(CourseDto courseDto);
+    String save(CourseDto courseDto);
 
     CourseDto update(CourseDto courseDto, Long id);
 
     List<CourseDto> findAll();
 
-    void softDelete(CourseDto courseDto);
+    void softDelete(Long id);
 
     void delete(Long id);
 

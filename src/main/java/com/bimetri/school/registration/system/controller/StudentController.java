@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequestMapping("/api/student")
 @RestController
-//@CrossOrigin("http://localhost:3000") //connection with React
+@CrossOrigin("http://localhost:3000") //connection with React
 public class StudentController {
 
     @Autowired
@@ -23,20 +23,33 @@ public class StudentController {
     private StudentRepository repository;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public StudentDto saveStudent(@RequestBody StudentDto studentDto) {
-        return this.studentService.save(studentDto);
+    public ResponseEntity saveStudent(@RequestBody StudentDto studentDto) throws Exception {
+
+        try{
+            this.studentService.save(studentDto);
+            return new ResponseEntity("Saving Succeeded!", HttpStatus.OK);
+        }catch (Exception e){
+           return new ResponseEntity("student already exists", HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
-    public StudentDto updateStudent(@RequestBody StudentDto studentDto, @PathVariable Long id) {
-        return studentService.update(studentDto, id);
+    public ResponseEntity updateStudent(@RequestBody StudentDto studentDto, @PathVariable Long id) {
+         studentService.update(studentDto, id);
+        return new ResponseEntity("Updated Succeeded!", HttpStatus.OK);
     }
 
     //Course assignment can only be made via Student.
     @RequestMapping(value = "/addCourse", method = RequestMethod.PUT)
     public ResponseEntity addCourse(@RequestBody StudentCourseDto studentCourseDto) {
-        this.studentService.addCourse(studentCourseDto);
-        return new ResponseEntity("Adding Succeeded!", HttpStatus.OK);
+
+        try{
+            this.studentService.addCourse(studentCourseDto);
+            return new ResponseEntity("Adding Succeeded!", HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity("course already exists", HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/softdelete", method = RequestMethod.PUT)

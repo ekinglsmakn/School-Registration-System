@@ -32,30 +32,17 @@ public class StudentServiceImp implements StudentService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public StudentDto save(StudentDto studentDto) {
+    public String save(StudentDto studentDto) {
 
-        Student student = mapper.map(studentDto, Student.class);
-        this.studentRepository.save(student);
-        return mapper.map(student, StudentDto.class);
+        if(studentRepository.findById(studentDto.getId()).isPresent()){
+            return "student already exists";
+        }else{
+            Student student = mapper.map(studentDto, Student.class);
+            this.studentRepository.save(student);
+            return "saving succeded";
+        }
 
     }
-//
-//    @Transactional(rollbackFor = Exception.class)
-//    @Override
-//    public StudentDto update(StudentDto studentDto) {
-//        Optional<Student> studentOptional = this.studentRepository.findById(studentDto.getId());
-//        Student student = new Student();
-//        if (studentOptional.isPresent()) {
-//            student = studentOptional.get();
-//            student.setName(studentDto.getName());
-//            student.setSurname(studentDto.getSurname());
-//            student.setNumber(studentDto.getNumber());
-//            this.studentRepository.save(student);
-//        }
-//        return mapper.map(student, StudentDto.class);
-//
-//    }
-
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -65,6 +52,7 @@ public class StudentServiceImp implements StudentService {
         student.setName(newStudent.getName());
         student.setSurname(newStudent.getSurname());
         student.setNumber(newStudent.getNumber());
+        student.setEnable(newStudent.getEnable());
         this.studentRepository.save(student);
         return mapper.map(student, StudentDto.class);
 
@@ -106,12 +94,14 @@ public class StudentServiceImp implements StudentService {
                 this.studentRepository.findById(studentCourseDto.getStudent_id()).get(), Student.class);
 
         for (Long id : studentCourseDto.getCourse_id_List()) {
-            //A student cannot be registered in more than 5 courses.
-            if (studentCourseDto.getCourse_id_List().size() < COURSE_SİZE) {
-                Course course = this.courseRepository.findById(id).orElse(null);
-                student.getCourseList().add(course);
-            }
-        }
+                  //A student cannot be registered in more than 5 courses.
+                  if (studentCourseDto.getCourse_id_List().size() < COURSE_SİZE) {
+                      Course course = this.courseRepository.findById(id).orElse(null);
+                      student.getCourseList().add(course);
+                  }
+
+          }
+
     }
 
     @Transactional(readOnly = true)

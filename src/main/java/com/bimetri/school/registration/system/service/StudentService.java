@@ -7,7 +7,7 @@ import com.bimetri.school.registration.system.model.dto.StudentProjectionDto;
 import java.util.List;
 
 public interface StudentService {
-    StudentDto save(StudentDto studentDto);
+    String save(StudentDto studentDto);
 
     StudentDto update(StudentDto studentDto, Long id);
 
