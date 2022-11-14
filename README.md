@@ -40,13 +40,12 @@ http://localhost:8080/api/course/update/1
 
 <h5>Student Tablosu Endpointleri;</h5>
 <ul>
-<li> POST : "http://localhost:8080/api/student/save" <i>Student tablosuna veri kaydeder. Örnek; 
-{
-    "id":60,
+<li> POST : "http://localhost:8080/api/student/save" <i>Student tablosuna veri kaydeder. 
+Örnek; 
+{   "id":60,
     "name":"Ekin",
     "surname":"AKIN",
     "number":325345
-
 }</i></li>
 <li> PUT : "http://localhost:8080/api/student/update/<b>id</b>" <i>Student tablosunda verilen id'ye göre güncelleme yapar. id endpointe verilmelidir. Veriler ise JSON olarak gönderilmelidir</i></li>
 <li> GET : "http://localhost:8080/api/student/get" <i>Student tablosundan sadece student verilerini çeker</i></li>
