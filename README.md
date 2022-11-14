@@ -20,18 +20,34 @@ Kullanılan Teknolojiler/Veri Tabanı/Framework'ler
 <h3>END POINTLER</h3>
 <h5>Course Tablosu Endpointleri;</h5>
 <ul>
-<li> POST : "http://localhost:8080/api/course/save" <i>Course tablosuna veri kaydeder</i></li>
-<li> PUT : "http://localhost:8080/api/course/update/<b>id</b>" <i>Course tablosunda verilen id'ye göre güncelleme yapar. id endpointe verilmelidir. Veriler ise JSON olarak gönderilmelidir</i></li>
+<li> POST : "http://localhost:8080/api/course/save" <i>Course tablosuna veri kaydeder. örnek; {
+    "id":5,
+    "courseName":"network"
+}</i></li>
+<li> PUT : "http://localhost:8080/api/course/update/<b>id</b>" <i>Course tablosunda verilen id'ye göre güncelleme yapar. id endpointe verilmelidir. Veriler ise JSON olarak gönderilmelidir. 
+örnek;
+http://localhost:8080/api/course/update/1
+{
+    "courseName":"History",
+    "enable":"1"
+}</i></li>
 <li> GET : "http://localhost:8080/api/course/get" <i>Course tablosundan sadece course verilerini çeker</i></li>
 <li> GET : "http://localhost:8080/api/course/filterByCourse" <i>Course tablosundan spesifik bir kursa kaydolan öğrencileri listeler. Id, postmanden query params olarak verilmelidir.
 örnek key= id, value=1 </i></li>
-<li> DELETE : "http://localhost:8080/api/course/delete/<b>id</b>" <i>verilen id'ye göre kurs verisi siler.</i></li>
-<li> PUT "http://localhost:8080/api/course/softdelete" <i>Requestbody olarak verilen id'ye göre kurs verisi sof delete yapar. Yani enable = 0 atanır..</i></li>
+<li> DELETE : "http://localhost:8080/api/course/delete/<b>id</b>" <i>verilen id'ye göre kurs verisi siler. Id url'e verilir.</i></li>
+<li> PUT : "http://localhost:8080/api/course/softdelete/<b>id</b>" <i>Requestbody olarak verilen id'ye göre kurs verisi soft delete yapar. Yani enable = 0 atanır.Id url'e verilmelidir.</i></li>
 </ul>
 
 <h5>Student Tablosu Endpointleri;</h5>
 <ul>
-<li> POST : "http://localhost:8080/api/student/save" <i>Student tablosuna veri kaydeder</i></li>
+<li> POST : "http://localhost:8080/api/student/save" <i>Student tablosuna veri kaydeder. Örnek; 
+{
+    "id":60,
+    "name":"Ekin",
+    "surname":"AKIN",
+    "number":325345
+
+}</i></li>
 <li> PUT : "http://localhost:8080/api/student/update/<b>id</b>" <i>Student tablosunda verilen id'ye göre güncelleme yapar. id endpointe verilmelidir. Veriler ise JSON olarak gönderilmelidir</i></li>
 <li> GET : "http://localhost:8080/api/student/get" <i>Student tablosundan sadece student verilerini çeker</i></li>
 
@@ -39,7 +55,9 @@ Kullanılan Teknolojiler/Veri Tabanı/Framework'ler
     "student_id":5,
     "course_id_List": [1,2]
 }</i></li>
-<li> GET : "http://localhost:8080/api/student/registered/<b>id</b>" <i>Spesifik bir öğrencinin kurs ve öğrenci bilgilerini getirir</i></li>
+
+<li> GET : "http://localhost:8080/api/student/registered/<b>id</b>" <i>Spesifik bir öğrencinin kurs ve öğrenci bilgilerini getirir. URL'e id verilmelidr. Kursa kayıtlı olmayan öğrencileri getirmez</i></li>
+
 <li> GET "http://localhost:8080/api/student/unregistered" <i>Hiçbir kursa kaydolmamış öğrencileri getirir</i></li>
 </ul>
 
