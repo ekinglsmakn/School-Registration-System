@@ -38,7 +38,7 @@ Kullanılan Teknolojiler/Veri Tabanı/Framework'ler
     "student_id":5,
     "course_id_List": [1,2]
 }</i></li>
-<li> GET : "http://localhost:8080/api/student/registered" <i>en az bir kursa kaydolan öğrencileri getirir</i></li>
+<li> GET : "http://localhost:8080/api/student/registered/<b>id</b>" <i>Spesifik bir öğrencinin kurs ve öğrenci bilgilerini getirir</i></li>
 <li> GET "http://localhost:8080/api/student/unregistered" <i>Hiçbir kursa kaydolmamış öğrencileri getirir</i></li>
 </ul>
 
