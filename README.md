@@ -28,5 +28,19 @@ Kullanılan Teknolojiler/Veri Tabanı/Framework'ler
 <li> PUT "http://localhost:8080/api/course/softdelete" <i>Requestbody olarak verilen id'ye göre kurs verisi sof delete yapar. Yani enable = 0 atanır..</i></li>
 </ul>
 
+<h5>Student Tablosu Endpointleri;</h5>
+<ul>
+<li> POST : "http://localhost:8080/api/student/save" <i>Student tablosuna veri kaydeder</i></li>
+<li> PUT : "http://localhost:8080/api/student/update/<b>id</b>" <i>Student tablosunda verilen id'ye göre güncelleme yapar. id endpointe verilmelidir. Veriler ise JSON olarak gönderilmelidir</i></li>
+<li> GET : "http://localhost:8080/api/student/get" <i>Student tablosundan sadece student verilerini çeker</i></li>
+
+<li> PUT : "http://localhost:8080/api/student/addCourse" <i>Student'lara Course ataması yapar. JSON olarak student id ve course id verilmelidir. örnek:{
+    "student_id":5,
+    "course_id_List": [1,2]
+}</i></li>
+<li> GET : "http://localhost:8080/api/student/registered" <i>en az bir kursa kaydolan öğrencileri getirir</i></li>
+<li> GET "http://localhost:8080/api/student/unregistered" <i>Hiçbir kursa kaydolmamış öğrencileri getirir</i></li>
+</ul>
+
 
 
