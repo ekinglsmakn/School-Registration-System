@@ -15,7 +15,7 @@ Kullanılan Teknolojiler/Veri Tabanı/Framework'ler
 <h3>Proje Nasıl Çalışır?</h3>
 <p>Projede Java 8 ve JDK 1.8 ile çalışılmıştır. Dolayısıyla JDK 1.8'in bilgisayarda kurulu olduğundan emin olmak gerekmektedir. Ayrıca MySql  Veri tabanı gerekmektedir. Projenin veri tabanı backup'ı aşağıda verilmiştir. Projede Intellij IDEA kullanılmıştır. Bilgisayarda kurulu olması gerekmektedir. Uygulama ayağa kaldırılmadan önce bir veri tabanı oluşturulup, indirilen "<i>school-registration-system-backup.sql</i>" isimli backup'ın, oluşturulan veri tabanına restore edilmesi gerekmektedir. Uygulama 8080 portunda çalışmaktadır.</p>
 
-<a href="https://github.com/ekinglsmakn/School-Registration-System/blob/6dd24b6416e252129260f272a836b1438440642a/school-registration-system-backup.sql" download>Veri Tabanını indirmek için tıklayınız</a>
+<a href="https://github.com/ekinglsmakn/School-Registration-System/blob/73ea2cee70b6c9fa65a04f7b44649815c426dc0f/school-registration-system-backup.sql" download>Veri Tabanını indirmek için tıklayınız</a>
 
 <h3>END POINTLER</h3>
 <h5>Course Tablosu Endpointleri;</h5>
