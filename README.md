@@ -23,7 +23,8 @@ Kullanılan Teknolojiler/Veri Tabanı/Framework'ler
 <li> POST : "http://localhost:8080/api/course/save" <i>Course tablosuna veri kaydeder</i></li>
 <li> PUT : "http://localhost:8080/api/course/update/<b>id</b>" <i>Course tablosunda verilen id'ye göre güncelleme yapar. id endpointe verilmelidir. Veriler ise JSON olarak gönderilmelidir</i></li>
 <li> GET : "http://localhost:8080/api/course/get" <i>Course tablosundan sadece course verilerini çeker</i></li>
-<li> GET : "http://localhost:8080/api/course/filterByCourseId?id=2" <i>Course tablosundan spesifik bir kursa kaydolan öğrencileri listeler. Id query params olarak verilmelidir.</i></li>
+<li> GET : "http://localhost:8080/api/course/filterByCourse" <i>Course tablosundan spesifik bir kursa kaydolan öğrencileri listeler. Id, postmanden query params olarak verilmelidir.
+örnek key= id, value=1 </i></li>
 <li> DELETE : "http://localhost:8080/api/course/delete/<b>id</b>" <i>verilen id'ye göre kurs verisi siler.</i></li>
 <li> PUT "http://localhost:8080/api/course/softdelete" <i>Requestbody olarak verilen id'ye göre kurs verisi sof delete yapar. Yani enable = 0 atanır..</i></li>
 </ul>
