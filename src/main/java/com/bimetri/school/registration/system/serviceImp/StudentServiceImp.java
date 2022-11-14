@@ -116,8 +116,8 @@ public class StudentServiceImp implements StudentService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<StudentProjectionDto> findRegisteredStudentById(Long studentId) {
-        return mapper.map(this.studentRepository.findAllById(studentId), new TypeToken<List<StudentProjectionDto>>() {
+    public List<StudentProjectionDto> findRegisteredStudentById(Long id) {
+        return mapper.map(this.studentRepository.findAllById(id), new TypeToken<List<StudentProjectionDto>>() {
         }.getType());
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequestMapping("/api/student")
 @RestController
-@CrossOrigin("http://localhost:3000") //connection with React
+//@CrossOrigin("http://localhost:3000") //connection with React
 public class StudentController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class StudentController {
     }
 
     //Lists all students in database
-    @RequestMapping(value = "/getById{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getById/{id}", method = RequestMethod.GET)
     public StudentDto findStudentById(@PathVariable Long id) {
         return this.studentService.findById(id);
     }
@@ -65,8 +65,8 @@ public class StudentController {
 
 
     //Filters all courses a particular student is registered in
-    @RequestMapping(value = "/registered", method = RequestMethod.GET)
-    public List<StudentProjectionDto> findRegisteredStudentById(@RequestParam("id") Long id) {
+    @RequestMapping(value = "/registered/{id}", method = RequestMethod.GET)
+    public List<StudentProjectionDto> findRegisteredStudentById(@PathVariable Long id) {
         return this.studentService.findRegisteredStudentById(id);
     }
 

@@ -21,7 +21,7 @@ public interface StudentService {
 
     void addCourse(StudentCourseDto studentCourseDto);
 
-    List<StudentProjectionDto> findRegisteredStudentById(Long studentId);
+    List<StudentProjectionDto> findRegisteredStudentById(Long id);
 
     List<StudentDto> findUnregisteredStudent();
 

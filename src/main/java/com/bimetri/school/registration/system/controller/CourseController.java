@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequestMapping("/api/course")
 @RestController
-@CrossOrigin("http://localhost:3000") //connection with React
+//@CrossOrigin("http://localhost:3000") //connection with React
 public class CourseController {
 
     @Autowired
